@@ -3,7 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --grep @ui",
+    "test:api": "playwright test --grep @api",
+    "parabank:build": "cd ../parabank && mvn clean package",
+    "parabank:run": "cd ../parabank && mvn jetty:run"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/alexander-stevens/playwright.git"

@@ -24,11 +24,12 @@ export default defineConfig({
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  /* Shared settings for all the projects below. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://localhost:3000',
+    baseURL: 'http://localhost:8080/parabank', // Set the base URL
 
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    /* Collect trace when retrying the failed test. */
     trace: 'on-first-retry',
   },
 
@@ -71,9 +72,13 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+  webServer: {
+    // IMPORTANT: Make sure the path to your ParaBank source code is correct
+    command: './run-parabank.sh', 
+    url: 'http://localhost:8080/parabank',
+    // This setting keeps the server running if you already started it manually
+    reuseExistingServer: !process.env.CI, 
+    // Increase the timeout to give the Java server enough time to start
+    timeout: 120 * 1000, 
+  },
 });
